@@ -21,11 +21,11 @@ int fib(int n) {
 
    else {
       int i, j;
-      #pragma omp task shared(i) if(n>30)//do it in parallel only if n is grather than 30.
+#pragma omp task shared(i) if(n>30)//do it in parallel only if n is grather than 30.
       i=fib(n-1);
-      #pragma omp task shared(j) if(n>30)//do it in parallel only if n is grather than 30.
+#pragma omp task shared(j) if(n>30)//do it in parallel only if n is grather than 30.
       j=fib(n-2);
-      #pragma omp taskwait //wait until sum.
+#pragma omp taskwait //wait until sum.
       return i+j;
 
    
@@ -59,10 +59,10 @@ int main(int argc, char **argv){
    n = atoi(a);
    
    
-   #pragma omp parallel 
-   {
-      #pragma omp single
-      {  
+#pragma omp parallel 
+{
+#pragma omp single
+{  
          //calculate fibonacci number from F(0) to F(n)
          for (size_t i = 0; i <= n; i++)
          {
@@ -89,10 +89,8 @@ int main(int argc, char **argv){
                      }
                }
             }
-            printf("\n");
-            
-                      
+            printf("\n"); 
          }       
-      }
-   }   
+}
+}   
 }
